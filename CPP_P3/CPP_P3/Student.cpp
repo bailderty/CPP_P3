@@ -7,106 +7,99 @@
 //
 
 #include <stdio.h>
+#include <iostream>
 #include "Student.h"
-using namespace std;
 
-//Constructor
-Student::Student(int id, int numCourses)
+// Constructors
+// Constructs a default student with an ID of 0, 0 credits, and 0.0 GPA.
+Student::Student()
 {
+    studentID = 0;
+    credits = 0;
+    GPA = 0.0;
 
 }
-//return gpa of student
-float Student::getGPA()
+
+// Constructs a student with the given ID, 0 credits, and 0.0 GPA.
+Student::Student(int ID)
 {
-    //if gpa has not been calculated
-    if (gpa == 0) {
-        float totalGPA = 0;
-        float totalCredits = 0;
-        for (int i = 0; i< Courses.size(); i++) {
-            Coursetype c = Courses.at(i);
-            if(c.grade.compare("A")==0)
-            {
-                totalGPA = totalGPA + (4 * c.credits);
-            }
-            else if (c.grade.compare("AB")==0)
-            {
-                totalGPA = totalGPA + (3.5 * c.credits);
-            }
-            else if (c.grade.compare("B")==0)
-            {
-                totalGPA = totalGPA + (3 * c.credits);
-            }
-            else if (c.grade.compare("BC")==0)
-            {
-                totalGPA = totalGPA + (2.5 * c.credits);
-            }
-            else if (c.grade.compare("D")==0)
-            {
-                totalGPA = totalGPA + (2 * c.credits);
-            }
-            else
-            {
-                totalGPA = totalGPA + (0 * c.credits);
-            }
-            totalCredits = totalCredits + c.credits;
-        }
-        gpa =  totalGPA / totalCredits;
-        return gpa;
-    }
-    //return already calculated gpa
-    else
-    {
-        return gpa;
-    }
+    studentID = ID;
+    credits = 0;
+    GPA = 0.0;
 }
 
-//return number of courses
-int Student::getNumCourses()
+// Constructs a student with the given ID, number of credits, and GPA.
+Student::Student(int ID, int cr, double grPtAv)
 {
-    return nCourses;
+    studentID = ID;
+    credits = cr;
+    GPA = grPtAv;
 }
 
-//return student id
-int Student::getId()
+// Accessors
+// returns the student ID
+int Student::getID() const
 {
     return studentID;
 }
-//parameters int course number, int credits, char * grade
-//add course to student
-void Student::addStudentCourseInfo(int cNumber, int cCredits, char * g)
+
+// returns the number of credits
+int Student::getCredits() const
 {
-    Coursetype c;
-    c.courseNum = cNumber;
-    c.credits = cCredits;
-    c.grade = g;
-    transform(c.grade.begin(), c.grade.end(), c.grade.begin(), toupper);
-    Courses.push_back(c);
+    return credits;
 }
 
-//parameters int course number
-//return true if student took course
-bool Student::tookCourse(int courseNumber)
+// returns the GPA
+double Student::getGPA() const
 {
-    for (int i = 0; i< Courses.size(); i++) {
-        Coursetype c = Courses.at(i);
-        if (c.courseNum == courseNumber) {
-            return true;
-        }
+    return GPA;
+}
+
+// Other methods
+
+// Updates the total credits and overall GPA to take into account the
+// additions of the given letter grade in a course with the given number
+// of credits.  The update is done by first converting the letter grade
+// into a numeric value (A = 4.0, B = 3.0, etc.).  The new GPA is
+// calculated using the formula:
+//
+//            (oldGPA * old_total_credits) + (numeric_grade * cr)
+//   newGPA = ---------------------------------------------------
+//                        old_total_credits + cr
+//
+// Finally, the total credits is updated (to old_total_credits + cr)
+void Student::update(char grade, int cr)
+{
+    int g = 0;
+    if(grade == 'A')
+    {
+        g = 4;
     }
-    return false;
+    else if (grade == 'B')
+    {
+        g = 3;
+    }
+    else if (grade == 'C')
+    {
+        g = 2;
+    }
+    else if (grade == 'D')
+    {
+        g = 1;
+    }
+    else if (grade == 'F')
+    {
+        g = 0;
+    }
+    
+    GPA = (GPA * credits) + (g * cr) / (credits + cr);
+    credits = credits + cr;
 }
 
-/*
- void Student::print()
- {
- std::cout << "student id: " << studentID << std::endl;
- cout << "num Courses: " << nCourses << endl;
- for(int i = 0; i < Courses.size(); i++)
- {
- Coursetype c = Courses.at(i);
- cout << "couse number: " << c.courseNum << endl;
- cout << "credits: " << c.credits << endl;
- cout << "grade: " << c.grade << endl;
- }
- }
- */
+// Prints out the student to standard output in the format:
+//   ID,credits,GPA
+// Note: the end-of-line is NOT printed after the student information
+void Student::print() const
+{
+    std::cout<<studentID<<","<<credits<<","<<GPA;
+}
