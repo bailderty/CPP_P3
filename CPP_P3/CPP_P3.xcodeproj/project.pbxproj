@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		74DDA7521CB6CF1800054143 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DDA7511CB6CF1800054143 /* main.cpp */; };
+		74DDA75B1CB6CFC200054143 /* Student.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74DDA75A1CB6CFC200054143 /* Student.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +28,7 @@
 		74DDA7511CB6CF1800054143 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		74DDA7581CB6CF2100054143 /* SortedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SortedList.h; sourceTree = "<group>"; };
 		74DDA7591CB6CF2100054143 /* Student.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Student.h; sourceTree = "<group>"; };
+		74DDA75A1CB6CFC200054143 /* Student.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Student.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +61,9 @@
 		74DDA7501CB6CF1800054143 /* CPP_P3 */ = {
 			isa = PBXGroup;
 			children = (
-				74DDA7581CB6CF2100054143 /* SortedList.h */,
 				74DDA7591CB6CF2100054143 /* Student.h */,
+				74DDA75A1CB6CFC200054143 /* Student.cpp */,
+				74DDA7581CB6CF2100054143 /* SortedList.h */,
 				74DDA7511CB6CF1800054143 /* main.cpp */,
 			);
 			path = CPP_P3;
@@ -123,6 +126,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74DDA7521CB6CF1800054143 /* main.cpp in Sources */,
+				74DDA75B1CB6CFC200054143 /* Student.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
