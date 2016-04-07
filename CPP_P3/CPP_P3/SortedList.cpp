@@ -11,7 +11,8 @@
 // constructor
 SortedList::SortedList()
 {
-    
+    head->student = nullptr;
+    head->next = nullptr;
 }
 
 // If a student with the same ID is not already in the list, inserts
@@ -45,4 +46,19 @@ Student * SortedList::remove(int studentID)
 void SortedList::print() const
 {
     
+}
+
+//private
+
+// removes all nodes from this list. Be sure to free all memory
+void SortedList::freeList(SortedList::Listnode *L)
+{
+    
+}
+
+// returns a pointer to the first node of a list with a
+// copy of all nodes of the sorted list
+SortedList::Listnode * SortedList::copyList(SortedList::Listnode *L)
+{
+    return nullptr;
 }
