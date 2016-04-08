@@ -33,22 +33,50 @@ void test2()
 {
     SortedList * sl = new SortedList();
     Student * find = new Student();
-    Student * s0 = new Student(5);
-    Student * s1 = new Student(12);
-    Student * s2 = new Student(6);
-    Student * s3 = new Student(4);
-    Student * s4 = new Student(2);
-    Student * s5 = new Student(8);
+    Student * s0 = new Student(6);
+    Student * s1 = new Student(15);
+    Student * s2 = new Student(9);
+    Student * s3 = new Student(3);
+    Student * s4 = new Student(0);
+    Student * s5 = new Student(12);
     sl->insert(s0);
     sl->insert(s1);
     sl->insert(s2);
     sl->insert(s3);
     sl->insert(s4);
     sl->insert(s5);
-    find = sl->find(1);
-    find->print();
-    sl->print();
+
     
+    find = sl->find(6);
+    if (find->getID() != 6)
+    {
+        std::cout<<"Error: SortedList.cpp find did not find id 5\n";
+        exit(1);
+    }
+    find = sl->find(-1);
+    if (find != NULL)
+    {
+        std::cout<<"Error: SortedList.cpp find did not return NULL when given an id not in the list\n";
+        exit(1);
+    }
+    
+    for (int i = 0; i < 6; i++) {
+        Student * test = new Student();
+        test = sl->find(i*3);
+        if (test->getID() != i * 3) {
+            std::cout<<"Error: SortedList.cpp insert\n";
+            exit(1);
+        }
+    }
+    
+    //remove middle
+    sl->remove(6);
+    //remove first node
+    sl->remove(0);
+    //remove last node
+    sl->remove(15);
+    
+    sl->print();
 }
 
 int main()

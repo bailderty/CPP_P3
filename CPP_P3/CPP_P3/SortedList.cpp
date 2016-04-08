@@ -96,6 +96,7 @@ Student * SortedList::remove(int studentID)
             delete temp;
             return s;
         }
+        n = n->next;
     }
     //if last node matches studentID
     if (n->next->student->getID() == studentID)
