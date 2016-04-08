@@ -7,9 +7,35 @@
 //
 
 #include <iostream>
+#include "Student.h"
+#include "SortedList.h"
+
+
+//tests Student.cpp
+void test1()
+{
+    Student * s1 = new Student();
+    Student * s2 = new Student(0);
+    Student * s3 = new Student(0,0,0.0);
+    if (s1->getID() != s2->getID()) {
+        std::cout<<"Error constructor Student(int ID) in Student.cpp\n";
+        exit(1);
+    }
+    if (s1->getID() != s3->getID() || s1->getCredits() != s3->getCredits() || s1->getGPA() != s3->getGPA()) {
+        std::cout<<"Error constructor Student(int ID, int cr, double grPtAv) in Student.cpp\n";
+        exit(1);
+    }
+    std::cout<<"Test1 passed\n";
+}
+
+//tests SortedList.cpp
+void test2()
+{
+    
+}
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::cout << "Hello, World!\n";
+    test1();
     return 0;
 }
