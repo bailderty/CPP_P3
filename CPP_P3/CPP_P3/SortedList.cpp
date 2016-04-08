@@ -13,8 +13,10 @@
 // constructor
 SortedList::SortedList()
 {
-    head->student = nullptr;
-    head->next = nullptr;
+    Listnode * head = new Listnode();
+    this->head = head;
+    this->head->student = NULL;
+    this->head->next = NULL;
 }
 
 // If a student with the same ID is not already in the list, inserts
@@ -24,7 +26,7 @@ SortedList::SortedList()
 bool SortedList::insert(Student *s)
 {
     //insert into first node
-    if (head->student == nullptr)
+    if (head->student == NULL)
     {
         head->student = s;
         return true;
@@ -39,11 +41,11 @@ bool SortedList::insert(Student *s)
         Listnode * n = head;
         while (s->getID() > n->next->student->getID())
         {
-            if (n->next != nullptr)
+            if (n->next != NULL)
             {
                 n->next = n->next->next;
             }
-            else if (n->next == nullptr)
+            else if (n->next == NULL)
             {
                 break;
             }
@@ -68,7 +70,7 @@ bool SortedList::insert(Student *s)
 Student * SortedList::find(int studentID)
 {
     Listnode * n = head;
-    while (n->next != nullptr)
+    while (n->next != NULL)
     {
         if (n->student->getID() == studentID)
         {
@@ -87,10 +89,10 @@ Student * SortedList::remove(int studentID)
 {
     Student * s;
     //if head is the only node and it matches studentID
-    if (head->student->getID() == studentID && head->next == nullptr)
+    if (head->student->getID() == studentID && head->next == NULL)
     {
         s = head->student;
-        head->student = nullptr;
+        head->student = NULL;
         return s;
     }
     //if head is not the only node and it matches studentID
@@ -104,7 +106,7 @@ Student * SortedList::remove(int studentID)
     }
     //if a middle node matches studendID
     Listnode * n = head;
-    while (n->next->next != nullptr)
+    while (n->next->next != NULL)
     {
         if (n->next->student->getID() == studentID)
         {
@@ -132,9 +134,9 @@ Student * SortedList::remove(int studentID)
 void SortedList::print() const
 {
     Listnode * n = head;
-    while (n->next != nullptr)
+    while (n->next != NULL)
     {
-        if (n->next->next != nullptr)
+        if (n->next->next != NULL)
         {
             std::cout<<n->student->getID()<<",";
         }
@@ -153,7 +155,7 @@ void SortedList::freeList(SortedList::Listnode *L)
     Listnode * n = L;
 
     //delete all but last node
-    while (L->next != nullptr)
+    while (L->next != NULL)
     {
         L = L->next;
         delete n;
@@ -167,5 +169,5 @@ void SortedList::freeList(SortedList::Listnode *L)
 // copy of all nodes of the sorted list
 SortedList::Listnode * SortedList::copyList(SortedList::Listnode *L)
 {
-    return nullptr;
+    return NULL;
 }

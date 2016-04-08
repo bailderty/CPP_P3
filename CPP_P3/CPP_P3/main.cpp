@@ -31,11 +31,17 @@ void test1()
 //tests SortedList.cpp
 void test2()
 {
+    SortedList * sl = new SortedList();
+    Student * s1 = new Student(1);
+    Student * s2 = new Student(0);
+    sl->insert(s1);
+    sl->insert(s2);
+    sl->print();
     
 }
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
+int main()
+{
     test1();
     return 0;
 }
