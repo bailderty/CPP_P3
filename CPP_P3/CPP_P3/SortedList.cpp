@@ -111,7 +111,17 @@ void SortedList::print() const
 // removes all nodes from this list. Be sure to free all memory
 void SortedList::freeList(SortedList::Listnode *L)
 {
-    
+    Listnode * n = L;
+
+    //delete all but last node
+    while (L->next != nullptr)
+    {
+        L = L->next;
+        delete n;
+        n = L;
+    }
+    //delete last node
+    delete L;
 }
 
 // returns a pointer to the first node of a list with a
