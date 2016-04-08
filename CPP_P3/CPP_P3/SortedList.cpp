@@ -67,7 +67,15 @@ bool SortedList::insert(Student *s)
 // student is found, it is returned; if it is not found, NULL is returned.
 Student * SortedList::find(int studentID)
 {
-    return nullptr;
+    Listnode * n = head;
+    while (n->next != nullptr)
+    {
+        if (n->student->getID() == studentID)
+        {
+            return n->student;
+        }
+    }
+    return NULL;
 }
 
 // Searches the list for a student with the given student ID.  If the
