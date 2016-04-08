@@ -25,44 +25,23 @@ SortedList::SortedList()
 // then the list is not changed and false is returned.
 bool SortedList::insert(Student *s)
 {
-    //insert into first node
-    if (head->student == NULL)
-    {
-        head->student = s;
-        return true;
+    Listnode * current = new Listnode();
+    Listnode * newNode = new Listnode();
+    newNode->student = s;
+    if (head->next == NULL || head->student->getID() >= newNode->student->getID()) {
+        newNode->next = head;
+        head = newNode;
     }
-    //insert into any node after first node
     else
     {
-        //set newNode
-        Listnode * newNode = new Listnode();
-        newNode->student = s;
-        //while newNode's ID is > next node's id continue otherwise break
-        Listnode * n = head;
-        while (s->getID() > n->next->student->getID())
-        {
-            if (n->next != NULL)
-            {
-                n->next = n->next->next;
-            }
-            else if (n->next == NULL)
-            {
-                break;
-            }
+        current = head;
+        while (current->next->next != NULL && current->next->student->getID() < newNode->student->getID()) {
+            current = current->next;
         }
-        //if newNode's id is equal to next node's id return false
-        if (s->getID() == n->next->student->getID())
-        {
-            return false;
-        }
-        //insert node
-        else
-        {
-            newNode->next = n->next;
-            n->next = newNode;
-            return true;
-        }
+        newNode->next = current->next;
+        current->next = newNode;
     }
+    return true;
 }
 
 // Searches the list for a student with the given student ID.  If the
@@ -76,6 +55,7 @@ Student * SortedList::find(int studentID)
         {
             return n->student;
         }
+        n = n->next;
     }
     return NULL;
 }
@@ -136,14 +116,8 @@ void SortedList::print() const
     Listnode * n = head;
     while (n->next != NULL)
     {
-        if (n->next->next != NULL)
-        {
-            std::cout<<n->student->getID()<<",";
-        }
-        else
-        {
-            std::cout<<n->student->getID();
-        }
+        std::cout<<n->student->getID()<<std::endl;
+        n = n->next;
     }
 }
 

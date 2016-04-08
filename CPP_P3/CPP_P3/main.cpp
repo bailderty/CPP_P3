@@ -32,10 +32,21 @@ void test1()
 void test2()
 {
     SortedList * sl = new SortedList();
-    Student * s1 = new Student(1);
-    Student * s2 = new Student(0);
+    Student * find = new Student();
+    Student * s0 = new Student(5);
+    Student * s1 = new Student(12);
+    Student * s2 = new Student(6);
+    Student * s3 = new Student(4);
+    Student * s4 = new Student(2);
+    Student * s5 = new Student(8);
+    sl->insert(s0);
     sl->insert(s1);
     sl->insert(s2);
+    sl->insert(s3);
+    sl->insert(s4);
+    sl->insert(s5);
+    find = sl->find(1);
+    find->print();
     sl->print();
     
 }
@@ -43,5 +54,6 @@ void test2()
 int main()
 {
     test1();
+    test2();
     return 0;
 }
