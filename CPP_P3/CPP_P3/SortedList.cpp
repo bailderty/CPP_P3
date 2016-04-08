@@ -7,7 +7,9 @@
 //
 
 #include <stdio.h>
+#include <iostream>
 #include "SortedList.h"
+
 // constructor
 SortedList::SortedList()
 {
@@ -21,7 +23,44 @@ SortedList::SortedList()
 // then the list is not changed and false is returned.
 bool SortedList::insert(Student *s)
 {
-    return false;
+    //insert into first node
+    if (head->student == nullptr)
+    {
+        head->student = s;
+        return true;
+    }
+    //insert into any node after first node
+    else
+    {
+        //set newNode
+        Listnode * newNode = new Listnode();
+        newNode->student = s;
+        //while newNode's ID is > next node's id continue otherwise break
+        Listnode * n = head;
+        while (s->getID() > n->next->student->getID())
+        {
+            if (n->next != nullptr)
+            {
+                n->next = n->next->next;
+            }
+            else if (n->next == nullptr)
+            {
+                break;
+            }
+        }
+        //if newNode's id is equal to next node's id return false
+        if (s->getID() == n->next->student->getID())
+        {
+            return false;
+        }
+        //insert node
+        else
+        {
+            newNode->next = n->next;
+            n->next = newNode;
+            return true;
+        }
+    }
 }
 
 // Searches the list for a student with the given student ID.  If the
@@ -45,7 +84,18 @@ Student * SortedList::remove(int studentID)
 // printed in order of student ID (from smallest to largest), one per line
 void SortedList::print() const
 {
-    
+    Listnode * n = head;
+    while (n->next != nullptr)
+    {
+        if (n->next->next != nullptr)
+        {
+            std::cout<<n->student->getID()<<",";
+        }
+        else
+        {
+            std::cout<<n->student->getID();
+        }
+    }
 }
 
 //private
