@@ -85,7 +85,46 @@ Student * SortedList::find(int studentID)
 // the removed list node should be deleted.
 Student * SortedList::remove(int studentID)
 {
-    return nullptr;
+    Student * s;
+    //if head is the only node and it matches studentID
+    if (head->student->getID() == studentID && head->next == nullptr)
+    {
+        s = head->student;
+        head->student = nullptr;
+        return s;
+    }
+    //if head is not the only node and it matches studentID
+    else if (head->student->getID() == studentID)
+    {
+        s = head->student;
+        Listnode * n = head->next;
+        delete head;
+        head = n;
+        return s;
+    }
+    //if a middle node matches studendID
+    Listnode * n = head;
+    while (n->next->next != nullptr)
+    {
+        if (n->next->student->getID() == studentID)
+        {
+            s = n->next->student;
+            Listnode * temp = n->next;
+            n->next = n->next->next;
+            delete temp;
+            return s;
+        }
+    }
+    //if last node matches studentID
+    if (n->next->student->getID() == studentID)
+    {
+        s = n->next->student;
+        n = n->next;
+        delete n;
+        return s;
+    }
+    //no node matched studendID
+    return NULL;
 }
 
 // Prints out the list of students to standard output.  The students are
