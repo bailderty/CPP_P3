@@ -70,7 +70,7 @@ double Student::getGPA() const
 // Finally, the total credits is updated (to old_total_credits + cr)
 void Student::update(char grade, int cr)
 {
-    int g = 0;
+    double g = 0;
     if(grade == 'A')
     {
         g = 4;
@@ -91,8 +91,7 @@ void Student::update(char grade, int cr)
     {
         g = 0;
     }
-    
-    GPA = (GPA * credits) + (g * cr) / (credits + cr);
+    GPA = ((GPA * credits) + (g * cr)) / (credits + cr);
     credits = credits + cr;
 }
 

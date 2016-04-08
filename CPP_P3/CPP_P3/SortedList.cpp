@@ -28,20 +28,32 @@ bool SortedList::insert(Student *s)
     Listnode * current = new Listnode();
     Listnode * newNode = new Listnode();
     newNode->student = s;
-    if (head->next == NULL || head->student->getID() >= newNode->student->getID()) {
+    if (head->next == NULL || head->student->getID() >= newNode->student->getID())
+    {
+        if (head->student != NULL && head->student->getID() == newNode->student->getID())
+        {
+            return false;
+        }
         newNode->next = head;
         head = newNode;
+        return true;
     }
     else
     {
         current = head;
-        while (current->next->next != NULL && current->next->student->getID() < newNode->student->getID()) {
+        while (current->next->next != NULL && current->next->student->getID() < newNode->student->getID())
+        {
             current = current->next;
+
+        }
+        if (current->next->student != NULL && current->next->student->getID() == newNode->student->getID())
+        {
+            return false;
         }
         newNode->next = current->next;
         current->next = newNode;
+        return true;
     }
-    return true;
 }
 
 // Searches the list for a student with the given student ID.  If the
@@ -88,6 +100,10 @@ Student * SortedList::remove(int studentID)
     Listnode * n = head;
     while (n->next->next != NULL)
     {
+        if (n->student->getID() > studentID)
+        {
+            return NULL;
+        }
         if (n->next->student->getID() == studentID)
         {
             s = n->next->student;
