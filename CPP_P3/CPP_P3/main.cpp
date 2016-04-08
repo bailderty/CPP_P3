@@ -7,9 +7,23 @@
 //
 
 #include <iostream>
+#include "Student.h"
+#include "SortedList.h"
+
+
+void test3()
+{
+    SortedList * sl = new SortedList();
+    Student * s1 = new Student(1);
+    Student * s2 = new Student(0);
+    sl->insert(s1);
+    sl->insert(s2);
+    sl->print();
+    
+}
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    std::cout << "Hello, World!\n";
+    test3();
     return 0;
 }
