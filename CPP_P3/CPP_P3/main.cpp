@@ -1,3 +1,8 @@
+/*
+ Conclusions: the updates mattered for SortedList because the class used pointers rather than basic data types
+ This difference determined that making your own destructor, copy constructor, and copy assignment operator a good idea.
+*/
+
 #include <stdlib.h>
 #include <iostream>
 #include "Student.h"
@@ -19,6 +24,7 @@ void test1()
         exit(1);
     }
     
+    //test update()
     Student * s4 = new Student(10,0,0.0);
     s4->update('A', 1);
     s4->update('B', 1);
@@ -37,6 +43,7 @@ void test1()
 //tests SortedList.cpp
 void test2()
 {
+    bool b1,b2,b3,b4,b5,b0;
     SortedList * sl = new SortedList();
     Student * find;
     Student * s0 = new Student(6);
@@ -46,23 +53,31 @@ void test2()
     Student * s4 = new Student(0);
     Student * s5 = new Student(12);
     find = s1;
-    sl->insert(s0);
-    sl->insert(s1);
-    sl->insert(s2);
-    sl->insert(s3);
-    sl->insert(s4);
-    sl->insert(s5);
+    b0 = sl->insert(s0);
+    b1 = sl->insert(s1);
+    b2 = sl->insert(s2);
+    b3 = sl->insert(s3);
+    b4 = sl->insert(s4);
+    b5 = sl->insert(s5);
+    //test inserts for true;
+    if (b0 == false || b1 == false || b2 == false || b3 == false || b4 == false || b5 == false)
+    {
+        std::cout<<"Error: SortedList.cpp insert should have returned true\n";\
+        exit(1);
+    }
+    //test middle insert() for false
     if (sl->insert(s0) != false)
     {
         std::cout<<"Error: SortedList.cpp insert should have returned false\n";\
         exit(1);
     }
+    //test node 1 insert() for false
     if (sl->insert(s4) != false)
     {
         std::cout<<"Error: SortedList.cpp insert should have returned false\n";\
         exit(1);
     }
-
+    //test find()
     find = sl->find(6);
     if (find->getID() != 6)
     {
@@ -75,7 +90,7 @@ void test2()
         std::cout<<"Error: SortedList.cpp find did not return NULL when given an id not in the list\n";
         exit(1);
     }
-    
+    //another test for insert()
     for (int i = 0; i < 6; i++) {
         s1 = sl->find(i*3);
         if (s1->getID() != i * 3) {
@@ -83,19 +98,14 @@ void test2()
             exit(1);
         }
     }
+    
     //remove middle
     sl->remove(6);
     //remove first node
     sl->remove(0);
     //remove last node
     sl->remove(15);
-    
-    if (sl->remove(0) != NULL)
-    {
-        std::cout<<"Error: SortedList.cpp remove should have returned NULL\n";
-        exit(1);
-    }
-    
+    //check remove() for NULL condition
     if (sl->remove(0) != NULL)
     {
         std::cout<<"Error: SortedList.cpp remove should have returned NULL\n";
