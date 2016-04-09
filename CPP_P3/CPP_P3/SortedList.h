@@ -15,11 +15,9 @@ class SortedList {
     
     SortedList();                                 // constructor
 
-/***************************************** UNCOMMENT AND IMPLEMENT FOR P3
     SortedList(const SortedList &S);              // copy constructor
     ~SortedList();                                // destructor
     SortedList & operator=(const SortedList &S);  // assignment
- ****************************************************************/
 
 
     bool insert(Student *s);

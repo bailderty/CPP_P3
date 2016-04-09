@@ -1,10 +1,3 @@
-//
-//  main.cpp
-//  CPP_P3
-//
-//  Created by Brett Meyer on 4/7/16.
-//  Copyright © 2016 Brett Meyer. All rights reserved.
-//
 
 #include <iostream>
 #include "Student.h"
@@ -17,6 +10,7 @@ void test1()
     Student * s1 = new Student();
     Student * s2 = new Student(0);
     Student * s3 = new Student(0,0,0.0);
+    Student * s5 = s1;
     if (s1->getID() != s2->getID()) {
         std::cout<<"Error constructor Student(int ID) in Student.cpp\n";
         exit(1);
@@ -33,7 +27,7 @@ void test1()
         std::cout<<"Error Student.cpp update does not work\n";
         exit(1);
     }
-    
+    delete s1,s2,s3,s4,s5;
     std::cout<<"Test1 passed\n";
 
 }
@@ -42,6 +36,7 @@ void test1()
 void test2()
 {
     SortedList * sl = new SortedList();
+    SortedList * sl2 = new SortedList();
     Student * find = new Student();
     Student * s0 = new Student(6);
     Student * s1 = new Student(15);
@@ -55,7 +50,7 @@ void test2()
     sl->insert(s3);
     sl->insert(s4);
     sl->insert(s5);
-    
+    sl2 = sl;
     if (sl->insert(s0) != false)
     {
         std::cout<<"Error: SortedList.cpp insert should have returned false\n";\
@@ -111,13 +106,16 @@ void test2()
     //should print 3 9 12 and it does
     //sl->print();
     
+    delete sl,sl2;
+    delete find,s0,s1,s2,s3,s4,s5;
+    
     std::cout<<"Test2 passed\n";
 }
 
 int main()
 {
-    //test1();
-    //test2();
+    test1();
+    test2();
     
     
     return 0;

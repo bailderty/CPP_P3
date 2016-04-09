@@ -1,11 +1,3 @@
- //
-//  Student.cpp
-//  StudentDatabase
-//
-//  Created by Brett Meyer on 2/29/16.
-//  Copyright © 2016 BDM. All rights reserved.
-//
-
 #include <stdio.h>
 #include <iostream>
 #include "Student.h"
@@ -34,6 +26,29 @@ Student::Student(int ID, int cr, double grPtAv)
     studentID = ID;
     credits = cr;
     GPA = grPtAv;
+}
+
+ // copy constructor
+Student::Student(const Student &S)
+{
+    studentID = S.studentID;
+    credits = S.credits;
+    GPA = S.GPA;
+}
+// destructor
+Student::~Student()
+{
+    //all basic data types
+}
+// assignment
+Student & Student::operator=(const Student &S)
+{
+    if (this != &S) {
+        studentID = S.studentID;
+        credits = S.credits;
+        GPA = S.GPA;
+    }
+    return *this;
 }
 
 // Accessors

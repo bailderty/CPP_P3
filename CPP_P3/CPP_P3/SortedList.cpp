@@ -1,15 +1,7 @@
-//
-//  SortedList.cpp
-//  CPP_P3
-//
-//  Created by Brett Meyer on 4/7/16.
-//  Copyright © 2016 Brett Meyer. All rights reserved.
-//
 
 #include <stdio.h>
 #include <iostream>
 #include "SortedList.h"
-
 // constructor
 SortedList::SortedList()
 {
@@ -17,6 +9,28 @@ SortedList::SortedList()
     this->head = head;
     this->head->student = NULL;
     this->head->next = NULL;
+}
+
+// copy constructor
+SortedList::SortedList(const SortedList &S)
+{
+    copyList(S.head);
+}
+
+// destructor
+SortedList::~SortedList()
+{
+    freeList(head);
+}
+
+// assignment
+SortedList & SortedList::operator=(const SortedList &S)
+{
+    if (this != &S) {
+        freeList(head);
+        head = S.head;
+    }
+    return *this;
 }
 
 // If a student with the same ID is not already in the list, inserts
@@ -138,6 +152,7 @@ void SortedList::print() const
     }
 }
 
+
 //private
 
 // removes all nodes from this list. Be sure to free all memory
@@ -145,20 +160,36 @@ void SortedList::freeList(SortedList::Listnode *L)
 {
     Listnode * n = L;
 
-    //delete all but last node
-    while (L->next != NULL)
+    //delete all nodes
+    while (n != NULL)
     {
         L = L->next;
         delete n;
         n = L;
     }
-    //delete last node
-    delete L;
+    
 }
 
 // returns a pointer to the first node of a list with a
 // copy of all nodes of the sorted list
 SortedList::Listnode * SortedList::copyList(SortedList::Listnode *L)
 {
-    return NULL;
+    if (L == NULL) {
+        return NULL;
+    }
+    
+    Listnode * temp = L;
+    Listnode * n = new Listnode();
+    n->student = new Student(*L->student);
+    n->next = NULL;
+
+    Listnode * const head = n;
+    while(temp != NULL)
+    {
+        n = new Listnode();
+        n->student = new Student(*temp->student);
+        n->next = NULL;
+        temp = temp->next;
+    }
+    return head;
 }

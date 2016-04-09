@@ -20,11 +20,9 @@ class Student {
     Student(int ID, int cr, double grPtAv);
     // Constructs a student with the given ID, number of credits, and GPA.
 
-/*************************************************** UNCOMMENT and Implement for p3
     Student(const Student &S);              // copy constructor
     ~Student();                             // destructor
     Student & operator=(const Student &S);  // assignment
-***************************************************/
 
     // Accessors
     int getID() const;       // returns the student ID
