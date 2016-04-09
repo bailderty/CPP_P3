@@ -27,8 +27,7 @@ SortedList::~SortedList()
 SortedList & SortedList::operator=(const SortedList &S)
 {
     if (this != &S) {
-        freeList(head);
-        head = S.head;
+        copyList(S.head);
     }
     return *this;
 }
@@ -39,33 +38,46 @@ SortedList & SortedList::operator=(const SortedList &S)
 // then the list is not changed and false is returned.
 bool SortedList::insert(Student *s)
 {
-    Listnode * current = new Listnode();
     Listnode * newNode = new Listnode();
     newNode->student = s;
+    //first node
     if (head->next == NULL || head->student->getID() >= newNode->student->getID())
     {
+        //student id are equal return false
         if (head->student != NULL && head->student->getID() == newNode->student->getID())
         {
+            newNode->student=NULL;
+            delete newNode;
             return false;
         }
         newNode->next = head;
         head = newNode;
+        newNode = NULL;
+        delete newNode;
         return true;
     }
+    //rest of nodes;
     else
     {
+        Listnode * current;
         current = head;
+        //find node before so we have pointer to node that is larger.
         while (current->next->next != NULL && current->next->student->getID() < newNode->student->getID())
         {
             current = current->next;
 
         }
+        //student id are equal return false
         if (current->next->student != NULL && current->next->student->getID() == newNode->student->getID())
         {
+            newNode->student = NULL;
+            delete newNode;
             return false;
         }
         newNode->next = current->next;
         current->next = newNode;
+        newNode = NULL;
+        delete newNode;
         return true;
     }
 }
@@ -75,6 +87,7 @@ bool SortedList::insert(Student *s)
 Student * SortedList::find(int studentID)
 {
     Listnode * n = head;
+    //look at each id to see if they match if not return NULL
     while (n->next != NULL)
     {
         if (n->student->getID() == studentID)
@@ -174,15 +187,16 @@ void SortedList::freeList(SortedList::Listnode *L)
 // copy of all nodes of the sorted list
 SortedList::Listnode * SortedList::copyList(SortedList::Listnode *L)
 {
+    //if L is null return NULL
     if (L == NULL) {
         return NULL;
     }
-    
+    //first node
     Listnode * temp = L;
     Listnode * n = new Listnode();
     n->student = new Student(*L->student);
     n->next = NULL;
-
+    //rest of nodes
     Listnode * const head = n;
     while(temp != NULL)
     {
@@ -191,5 +205,6 @@ SortedList::Listnode * SortedList::copyList(SortedList::Listnode *L)
         n->next = NULL;
         temp = temp->next;
     }
+    //return head pointer
     return head;
 }

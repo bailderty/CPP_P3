@@ -1,4 +1,4 @@
-
+#include <stdlib.h>
 #include <iostream>
 #include "Student.h"
 #include "SortedList.h"
@@ -10,7 +10,6 @@ void test1()
     Student * s1 = new Student();
     Student * s2 = new Student(0);
     Student * s3 = new Student(0,0,0.0);
-    Student * s5 = s1;
     if (s1->getID() != s2->getID()) {
         std::cout<<"Error constructor Student(int ID) in Student.cpp\n";
         exit(1);
@@ -27,7 +26,10 @@ void test1()
         std::cout<<"Error Student.cpp update does not work\n";
         exit(1);
     }
-    delete s1,s2,s3,s4,s5;
+    delete s1;
+    delete s2;
+    delete s3;
+    delete s4;
     std::cout<<"Test1 passed\n";
 
 }
@@ -36,21 +38,20 @@ void test1()
 void test2()
 {
     SortedList * sl = new SortedList();
-    SortedList * sl2 = new SortedList();
-    Student * find = new Student();
+    Student * find;
     Student * s0 = new Student(6);
     Student * s1 = new Student(15);
     Student * s2 = new Student(9);
     Student * s3 = new Student(3);
     Student * s4 = new Student(0);
     Student * s5 = new Student(12);
+    find = s1;
     sl->insert(s0);
     sl->insert(s1);
     sl->insert(s2);
     sl->insert(s3);
     sl->insert(s4);
     sl->insert(s5);
-    sl2 = sl;
     if (sl->insert(s0) != false)
     {
         std::cout<<"Error: SortedList.cpp insert should have returned false\n";\
@@ -76,14 +77,12 @@ void test2()
     }
     
     for (int i = 0; i < 6; i++) {
-        Student * test = new Student();
-        test = sl->find(i*3);
-        if (test->getID() != i * 3) {
+        s1 = sl->find(i*3);
+        if (s1->getID() != i * 3) {
             std::cout<<"Error: SortedList.cpp insert\n";
             exit(1);
         }
     }
-    
     //remove middle
     sl->remove(6);
     //remove first node
@@ -106,17 +105,24 @@ void test2()
     //should print 3 9 12 and it does
     //sl->print();
     
-    delete sl,sl2;
-    delete find,s0,s1,s2,s3,s4,s5;
+    delete s0;
+    delete s1;
+    delete s2;
+    delete s3;
+    delete s4;
+    delete s5;
+    delete find;
+    delete sl;
     
     std::cout<<"Test2 passed\n";
 }
 
 int main()
 {
+    //test Student.cpp
     test1();
+    //test SortedList.cpp
     test2();
-    
-    
+    std::cout<<"All Tests have passed\n";
     return 0;
 }
